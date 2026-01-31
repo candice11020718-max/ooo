@@ -1,0 +1,64 @@
+<html lang="english-US">
+<html< /html>
+    <!DOCTYPE html>
+    <html lang="zh">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>画布</title>
+        <style>
+            canvas {
+                border: 2px solid black;
+                cursor: crosshair;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <canvas id="canvas" width="600" height="400"></canvas>
+
+        <script>
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+
+            let drawing = false;
+
+            // 鼠标按下 → 开始画
+            canvas.addEventListener("mousedown", () => {
+                drawing = true;
+                ctx.beginPath();
+            });
+
+            // 鼠标松开 → 停止画
+            canvas.addEventListener("mouseup", () => {
+                drawing = false;
+            });
+
+            // 鼠标移动 → 画线
+            canvas.addEventListener("mousemove", (e) => {
+                if (!drawing) return;
+
+                ctx.lineWidth = 2;
+                ctx.lineCap = "round";
+                ctx.strokeStyle = "black";
+
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            });
+        </script>
+        <script>
+            function clearCanvas() {
+                const canvas = document.getElementById("canvas");
+                const ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            } //press clear button to clear canvas
+            const clearButton = document.createElement("button");
+            clearButton.innerText = "clear canvas";
+            clearButton.addEventListener("click", clearCanvas);
+            document.body.appendChild(clearButton);
+        </script>
+        </script>
+    </body>
+
+    </html>
